@@ -13,19 +13,38 @@ class BinaryTreeNode {
    * incomplete node-- that is, the length of the shortest path from the root to
    * a node with less than two children. */
   minDepthToIncompleteNode() {
+    let count = 1;
+    if (!this.left || !this.right) return count;
 
+    let leftCount = this.left.minDepthToIncompleteNode();
+    let rightCount = this.right.minDepthToIncompleteNode();
+
+    return leftCount > rightCount ? count + rightCount : count + leftCount;
   }
 
   /** maxDepth(): return the maximum depth from the invoking node -- that is,
    * the length of the longest path from the invoking node to a leaf. */
   maxDepth() {
+    let count = 1;
+    if (!this.left && !this.right) return count;
+
+    let leftCount = this.left.maxDepth();
+    let rightCount = this.right.maxDepth();
+
+    return leftCount < rightCount ? count + rightCount : count + leftCount;
 
   }
 
   /** minDepth(): return the minimum depth from the invoking node -- that is,
    * the length of the shortest path from the invoking node to a leaf. */
-   minDepth() {
+  minDepth() {
+    let count = 1;
+    if (!this.left && !this.right) return count;
 
+    let leftCount = this.left.minDepth();
+    let rightCount = this.right.minDepth();
+
+    return leftCount > rightCount ? count + rightCount : count + leftCount;
   }
 
   /** nextLarger(lowerBound): return the smallest value from the invoking node
